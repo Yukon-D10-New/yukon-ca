@@ -59,6 +59,9 @@
   {# END OF HEADER #}
 
   {{ page.secondary_menu }}
+  
+  {{ page.highlighted }}
+  {{ page.pre_content }}
 
   {% if type == "topics_page" %}
     {{
@@ -84,12 +87,11 @@
     {% endif %}
   {% endif %}
 
-  {{ page.highlighted }}
-  {{ page.pre_content }}
+  
 
   {{ page.help }}
 
-  <main role="main" class="container-lg grow">
+  <main role="main" class="container-lg grow page-layout">
     {{ page.breadcrumb }}
     <a id="main-content" tabindex="-1"></a>{# link is in html.html.twig #}
     <div class="row {% if content_type != "landing_page" and content_type != "topics_page" and content_type != "landing_page_level_2" and content_type != "news"  %}pt-20 {% endif %}">
