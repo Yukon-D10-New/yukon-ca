@@ -108,7 +108,7 @@
 				<div class="border-b-8 border-blue-400 shadow-lg px-20 pt-8 pb-10 bg-white rounded" style="border-bottom: 8px solid {{ node.field_highlight_color.color|raw }}">
 					<div class="campaign-text-only-wrapper">
 						<h1 class="mb-8 mt-0 text-4xl font-medium text-gray-450">{{ label }}</h1>
-						<p>{{ node.field_intro_text_block.value|raw }}</p>
+						{{ node.field_intro_text_block.value|raw }}
 					</div>
 				</div>
 			</div>
@@ -119,7 +119,7 @@
 		<div class="flex justify-center border-b-1 border-gray-90">
 			<div class="w-10/12">
 				<div class="campaign-nav mb-20">
-					<div class="flex gap-7">
+					<div class="flex flex-col md:flex-row gap-7">
 						{{ content.field_navigation_jump_point }}
 					</div>
 				</div>
@@ -135,14 +135,14 @@
 				<div class="border-b-8 border-blue-400 shadow-lg px-20 pt-8 pb-10 bg-white rounded" style="border-bottom: 8px solid {{ node.field_highlight_color.color|raw }}">
 					<div class="campaign-text-only-wrapper">
 						{% if node.field_add_social_media_channels.value == "1" and node.field_social_network is not empty %}
-							<h2 class="mb-3 mt-5 text-[22px] font-medium text-gray-450">Follow the campaign on</h2>
+							<h2 class="mb-3 mt-5 font-medium">{{ 'Follow the campaign on'|t }}</h2>
 							<div class="social-links border-b-1 border-gray-90 pb-6">
 								{{ content.field_social_network }}
 							</div>
 						{% endif %}
 						
 						<div class="feedback-form">
-							<h2 class="pt-8 mt-0 mb-3 text-[22px] text-gray-450">Give us your feedback</h2>
+							<h2 class="pt-8 mt-0 mb-3">{{ 'Give us your feedback'|t }}</h2>
 							{{ drupal_entity('webform', 'page_feedback') }}
 						</div>
 					</div>

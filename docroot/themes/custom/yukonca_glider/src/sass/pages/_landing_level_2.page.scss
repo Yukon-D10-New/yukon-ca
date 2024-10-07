@@ -1,0 +1,13 @@
+.page-node-type-landing-page-level-2 {
+    main {
+        .row {
+            @apply pt-0;
+        }
+    }
+
+    #block-breadcrumbs {
+        .breadcrumb {
+            @apply w-full;
+        }
+    }
+}

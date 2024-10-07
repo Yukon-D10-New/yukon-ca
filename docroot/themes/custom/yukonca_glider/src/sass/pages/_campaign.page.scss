@@ -19,6 +19,10 @@
 		.language-switcher-language-url {
 			ul {
 				@apply list-none m-0 p-0 font-medium;
+				
+				li[hreflang] {
+				    @apply mr-0;
+				}
 			}
 		}
 	}
@@ -34,7 +38,33 @@
 			}
 
 			&:has(.campaign-cta) {
-				@apply mb-20;
+				@apply mb-5;
+			}
+			
+			.campaign-quote-wrapper {
+			    @apply flex justify-center relative right-1/2 left-1/2 mx-[-50vw] w-screen bg-[#F9F9F9];
+
+			    blockquote {
+			        @apply relative text-[28px] text-gray-450 leading-1.1 pt-48 pb-[160px] mb-[23px];
+			        
+			        @include media-breakpoint-down(md) {
+			            @apply pt-32 pb-16;
+			        }
+			        
+			        &:before {
+    		            @apply content-[""] absolute right-0 left-0 bg-no-repeat w-full h-full top-[130px] -left-20;
+    		            background-image: url("../../images/svg/blockquote-bg.svg");
+    		            background-size: 140px auto;
+    		            
+    		            @include media-breakpoint-down(md) {
+    		                @apply top-[70px] -left-10
+    		            }
+    		        }
+    		        
+    		        .attr {
+    		            @apply mt-7.5 text-base text-right;
+    		        }
+			    }
 			}
     	}
 			
@@ -55,5 +85,35 @@
 				}
 			}
 		}
+		
+		.layout-content {
+	        @apply p-0;
+	    }
+		
+		.campaign-text-only-wrapper {
+		    h1 {
+		        @apply text-[42px];
+		    }
+		    
+		    p {
+		        &:last-child {
+		            @apply mb-0;
+		        }
+		    }
+		}
+		
+		h2 {
+		    @apply text-3.25xl;
+		}
+		
+		.campaign-social-media {
+		    h2 {
+		        @apply text-[22px] text-gray-450;
+		    }
+		}
+	}
+	
+	.shadow-lg {
+	    box-shadow: 0 20px 20px 0 rgba(155,155,155,.21);
 	}
 }
