@@ -5,6 +5,7 @@ dependencies:
   config:
     - views.view.in_page_alerts
   module:
+    - block_class
     - node
     - views
   theme:
@@ -12,7 +13,7 @@ dependencies:
 id: views_block__in_page_alerts_block
 theme: yukonca_glider
 region: content
-weight: -22
+weight: -29
 provider: null
 plugin: 'views_block:in_page_alerts-block'
 settings:
@@ -31,6 +32,9 @@ visibility:
       node: '@node.node_route_context:node'
     bundles:
       basic_page: basic_page
+      campaign_page: campaign_page
+      campground_directory_record: campground_directory_record
+      directory_records_places: directory_records_places
       documents: documents
       engagement: engagement
       landing_page: landing_page

@@ -129,6 +129,7 @@ module:
   tamper: 0
   taxonomy: 0
   text: 0
+  time_field: 0
   tmgmt: 0
   tmgmt_config: 0
   tmgmt_content: 0
@@ -166,6 +167,7 @@ module:
   yukon_w3_custom: 0
   yukon_w3_migrate: 0
   pathauto: 1
+  selective_better_exposed_filters: 1
   cshs_menu_link: 5
   content_translation: 10
   password_policy: 10

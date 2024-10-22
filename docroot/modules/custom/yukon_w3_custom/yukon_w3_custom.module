@@ -7,6 +7,7 @@
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\paragraphs\Entity\Paragraph;
+use Drupal\taxonomy\Entity\Term;
 
 /**
  * Implements hook_theme().
@@ -16,6 +17,14 @@ function yukon_w3_custom_theme() {
     'edit_language' => [
       'variables' => ['item' => NULL, 'language' => NULL],
       'template' => 'edit-language',
+    ],
+    'engagements_count' => [
+      'variables' => ['item' => NULL],
+      'template' => 'engagements-count',
+    ],
+    'blog_feed' => [
+      'variables' => ['language' => NULL, 'tid' => NULL],
+      'template' => 'blog-feed',
     ],
   ];
 }
@@ -43,13 +52,31 @@ function yukon_w3_custom_views_data() {
       'id' => 'month_filter',
     ],
   ];
-  
+
   $data['views']['year_filter'] = [
     'title' => t('Year filter - Custom Filter'),
     'filter' => [
       'title' => t('Year filter - Custom Filter'),
       'field' => 'created',
       'id' => 'year_filter',
+    ],
+  ];
+
+  $data['views']['event_month_filter'] = [
+    'title' => t('Event Month filter - Custom Filter'),
+    'filter' => [
+      'title' => t('Event Month filter - Custom Filter'),
+      'field' => 'field_event_start_time_value',
+      'id' => 'event_month_filter',
+    ],
+  ];
+
+  $data['views']['event_year_filter'] = [
+    'title' => t('Event Year filter - Custom Filter'),
+    'filter' => [
+      'title' => t('Event Year filter - Custom Filter'),
+      'field' => 'field_event_start_time_value',
+      'id' => 'event_year_filter',
     ],
   ];
 
@@ -76,5 +103,171 @@ function yukon_w3_custom_page_attachments(array &$page) {
       }
       $page['#attached']['drupalSettings']['chart_data'] = $chart_data;
     }
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for page.html.twig.
+ */
+function yukon_w3_custom_preprocess_views_view(&$variables) {
+  $view = $variables['view'];
+
+  if ($view->id() == 'events_listing') {
+    $community = $view->exposed_data['field_community_target_id'];
+    $category = $view->exposed_data['field_category_target_id'];
+    if ($view->exposed_data['field_community_target_id'] != 'All') {
+      $term = Term::load($view->exposed_data['field_community_target_id']);
+      $community = $term->getName();
+    }
+
+    if ($view->exposed_data['field_category_target_id'] != 'All') {
+      $term = Term::load($view->exposed_data['field_category_target_id']);
+      $category = $term->getName();
+    }
+
+    $variables['community'] = $community;
+    $variables['category'] = $category;
+
+    $variables['community_filter'] = $view->exposed_data['field_community_target_id'];
+    $variables['category_filter'] = $view->exposed_data['field_category_target_id'];
+    $variables['year'] = $view->exposed_data['event_year_filter'];
+    $variables['month'] = $view->exposed_data['event_month_filter'];
+    $variables['team'] = $view->exposed_data['field_yukon_editorial_team_target_id'];
+
+  }
+  if ($view->id() == 'places_listing') {
+    $title = $view->exposed_data['title'];
+    $community_facility = $view->exposed_data['field_community_facility_type_target_id'];
+    $community = $view->exposed_data['field_community_target_id'];
+
+    if ($view->exposed_data['field_community_target_id'] != 'All' && $view->exposed_data['field_community_target_id'] != '') {
+      $term = Term::load($view->exposed_data['field_community_target_id']);
+      $community = $term->getName();
+    }
+
+    if ($view->exposed_data['field_community_facility_type_target_id'] != 'All' && $view->exposed_data['field_community_facility_type_target_id'] != '') {
+      $term = Term::load($view->exposed_data['field_community_facility_type_target_id']);
+      $community_facility = $term->getName();
+    }
+
+    if ($view->exposed_data['title'] != '') {
+      $title = $view->exposed_data['title'];
+    }
+
+    $variables['community'] = $community;
+    $variables['community_facility'] = $community_facility;
+    $variables['title_output'] = $title;
+
+    $variables['community_filter'] = $view->exposed_data['field_community_target_id'];
+    $variables['community_facility_filter'] = $view->exposed_data['field_community_facility_type_target_id'];
+    $variables['title_filter'] = $view->exposed_data['title'];
+  }
+  if ($view->id() == 'documents_browse') {
+    $title = $view->exposed_data['combine'];
+    $department = $view->exposed_data['field_department_term_target_id'];
+    $category = $view->exposed_data['field_category_target_id'];
+
+    if ($view->exposed_data['field_department_term_target_id'] != 'All' && $view->exposed_data['field_department_term_target_id'] != '') {
+      $term = Term::load($view->exposed_data['field_department_term_target_id']);
+      $department = $term->getName();
+    }
+
+    if ($view->exposed_data['field_category_target_id'] != 'All' && $view->exposed_data['field_category_target_id'] != '') {
+      $term = Term::load($view->exposed_data['field_category_target_id']);
+      $category = $term->getName();
+    }
+
+    if ($view->exposed_data['combine'] != '') {
+      $title = $view->exposed_data['combine'];
+    }
+
+    $variables['department'] = $department;
+    $variables['category'] = $category;
+    $variables['combine_output'] = $title;
+
+    $variables['department_filter'] = $view->exposed_data['field_department_term_target_id'];
+    $variables['category_filter'] = $view->exposed_data['field_category_target_id'];
+    $variables['combine_filter'] = $view->exposed_data['combine'];
+  }
+
+  if ($view->id() == 'documents_browse') {
+    // dump($view->exposed_data); die;.
+    $title = $view->exposed_data['combine'];
+    $department = $view->exposed_data['field_department_term_target_id'];
+
+    if ($view->exposed_data['field_department_term_target_id'] != 'All' && $view->exposed_data['field_department_term_target_id'] != '') {
+      $term = Term::load($view->exposed_data['field_department_term_target_id']);
+      $department = $term->getName();
+    }
+
+    if ($view->exposed_data['combine'] != '') {
+      $title = $view->exposed_data['combine'];
+    }
+
+    $variables['department'] = $department;
+    $variables['combine_output'] = $title;
+
+    $variables['department_filter'] = $view->exposed_data['field_department_term_target_id'];
+    $variables['combine_filter'] = $view->exposed_data['combine'];
+  }
+  if ($view->id() == 'find_a_campground_or_recreation_site') {
+    // dump($view->exposed_data); die;.
+    $department = $view->exposed_data['region'];
+    $site_type = $view->exposed_data['site_type'];
+    $campsite = !is_array($view->exposed_data['wheelchair_accessible_campsite']) ? $view->exposed_data['wheelchair_accessible_campsite'] : $view->exposed_data['wheelchair_accessible_campsite'][1];
+    $ac_value = !is_array($view->exposed_data['field_at_least_one_wheelchair_ac_value']) ? $view->exposed_data['field_at_least_one_wheelchair_ac_value'] : $view->exposed_data['field_at_least_one_wheelchair_ac_value'][1];
+    $launch_value = !is_array($view->exposed_data['field_boat_launch_value']) ? $view->exposed_data['field_boat_launch_value'] : $view->exposed_data['field_boat_launch_value'][1];
+    $trails = !is_array($view->exposed_data['field_hiking_trails_value']) ? $view->exposed_data['field_hiking_trails_value'] : $view->exposed_data['field_hiking_trails_value'][1];
+    $playground = !is_array($view->exposed_data['field_playground_value']) ? $view->exposed_data['field_playground_value'] : $view->exposed_data['field_playground_value'][1];
+    $dock_no = !is_array($view->exposed_data['field_swimming_area_or_dock_no_l_value']) ? $view->exposed_data['field_swimming_area_or_dock_no_l_value'] : $view->exposed_data['field_swimming_area_or_dock_no_l_value'][1];
+
+    if ($view->exposed_data['region'] != 'All' && $view->exposed_data['region'] != '') {
+      $term = Term::load($view->exposed_data['region']);
+      $department = $term->getName();
+    }
+    if ($view->exposed_data['site_type'] != 'All' && $view->exposed_data['site_type'] != '') {
+      $term = Term::load($view->exposed_data['site_type']);
+      $site_type = $term->getName();
+    }
+    if (!is_array($view->exposed_data['wheelchair_accessible_campsite'])) {
+      $campsite = 'Wheelchair accessible campsite';
+    }
+    if (!isset($view->exposed_data['field_at_least_one_wheelchair_ac_value'][1])) {
+      $ac_value = 'Wheelchair accessible outhouse';
+    }
+    if (!isset($view->exposed_data['field_boat_launch_value'][1])) {
+      $launch_value = 'Boat launch';
+    }
+    if (!isset($view->exposed_data['field_hiking_trails_value'][1])) {
+      $trails = 'Hiking trails';
+    }
+    if (!isset($view->exposed_data['field_playground_value'][1])) {
+      $playground = 'Playground';
+    }
+    if (!isset($view->exposed_data['field_swimming_area_or_dock_no_l_value'][1])) {
+      $dock_no = 'Swimming area or dock';
+    }
+    $variables['department'] = $department;
+    if (isset($view->exposed_data['site_type'])) {
+      $variables['site_type'] = $site_type;
+    }
+    else {
+      $variables['site_type'] = 'All';
+    }
+    $variables['campsite'] = $campsite;
+    $variables['ac_value'] = $ac_value;
+    $variables['launch_value'] = $launch_value;
+    $variables['playground'] = $playground;
+    $variables['trails'] = $trails;
+    $variables['dock_no'] = $dock_no;
+
+    $variables['department_filter'] = $view->exposed_data['region'];
+    $variables['site_type_filter'] = $view->exposed_data['site_type'];
+    $variables['campsite_flter'] = !is_array($view->exposed_data['wheelchair_accessible_campsite']) ? $view->exposed_data['wheelchair_accessible_campsite'] : $view->exposed_data['wheelchair_accessible_campsite'][1];
+    $variables['ac_value_flter'] = !is_array($view->exposed_data['field_at_least_one_wheelchair_ac_value']) ? $view->exposed_data['field_at_least_one_wheelchair_ac_value'] : $view->exposed_data['field_at_least_one_wheelchair_ac_value'][1];
+    $variables['launch_value_flter'] = !is_array($view->exposed_data['field_boat_launch_value']) ? $view->exposed_data['field_boat_launch_value'] : $view->exposed_data['field_boat_launch_value'][1];
+    $variables['playground_flter'] = !is_array($view->exposed_data['field_playground_value']) ? $view->exposed_data['field_playground_value'] : $view->exposed_data['field_playground_value'][1];
+    $variables['trails_flter'] = !is_array($view->exposed_data['field_hiking_trails_value']) ? $view->exposed_data['field_hiking_trails_value'] : $view->exposed_data['field_hiking_trails_value'][1];
+    $variables['dock_no_flter'] = !is_array($view->exposed_data['field_swimming_area_or_dock_no_l_value']) ? $view->exposed_data['field_swimming_area_or_dock_no_l_value'] : $view->exposed_data['field_swimming_area_or_dock_no_l_value'][1];
   }
 }

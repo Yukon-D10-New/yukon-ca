@@ -5,6 +5,7 @@ dependencies:
   config:
     - views.view.places_listing
   module:
+    - block_class
     - system
     - views
   theme:
@@ -12,7 +13,7 @@ dependencies:
 id: views_block__places_listing_block_places_listing
 theme: yukonca_glider
 region: content
-weight: -12
+weight: -19
 provider: null
 plugin: 'views_block:places_listing-block_places_listing'
 settings:
@@ -26,4 +27,4 @@ visibility:
   request_path:
     id: request_path
     negate: false
-    pages: /places
+    pages: "/places\r\n/etablissements-installations-et-bureaux"

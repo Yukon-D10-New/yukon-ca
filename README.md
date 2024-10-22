@@ -51,11 +51,87 @@ The first step of upgrading the Druapl 7 vesrion to Drupal 10 is setting up a bl
 
 1. Setup a web server
 2. Copy the file system from the master branch
-3. Run composer update
+3. Run composer install
 4. Create database and assign user
 6. Enter the database credentails in the sites/default/settings.php file
+7. Go to sites/settings.php and comment the lines
+ 
+ if (!isset($databases['migrate'])) {
+    $databases['migrate'] = $databases['default'];
+    $databases['migrate']['default']['database'] = 'migrate';
+ }
+
+  Automatically generated include for settings managed by ddev.
+  $ddev_settings = dirname(__FILE__) . '/settings.ddev.php';
+  if (getenv('IS_DDEV_PROJECT') == 'true' && is_readable($ddev_settings)) {
+    require $ddev_settings;
+ }
+
 7. Hit the website URL to complete the installation process
 8. Please note that while setting up the website, we need to select "minimal" profile. Selecting other profiles will generate issues.
+9. Enter migrate Drupal 7 DB code and credentials in settings.php at the end. This is to connect the migration source.
+
+   $databases['migrate']['default'] = array (
+  'database' => 'D7_database_name',
+  'username' => 'D7_database_user',
+  'password'  => 'D7_database_password',
+  'host'      => 'localhost',
+  'port'      => '3306',
+  'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
+  'driver'    => 'mysql',
+); 
+
+10. Go to the terminal >> public_html and run this command to get the UUID (copy the UUID)
+    
+    ./vendor/bin/drush cget "system.site" uuid
+
+11. Once UUID is copied, go to config/default/system.site.yml and the replace the existing with the copied one.
+12. Go to the terminal >> public_html and run this command (select yes on prompt). Ignore the first error and run it again. After it gets completed, run it for the 3rd/4th time until only two files are left for the update. 
+
+    ./vendor/bin/drush cim
+
+13. Clear cache >>  ./vendor/bin/drush cr
+14. Run the d7-queries.php on the Drupal 7 database.
+15. Run migration using migrate_initial_and_update_w3.sh and leave it running for the next few hours until complete. (approxximate time 10+ hours)
+16. Run the d10-queries.php on the Drupal 10 database.
+17. Run the second migration using migration_complete_w3.sh and let it complete. (approxximate time 1 hour)
+18. Go to the terminal >> public_html and clear cache >>  ./vendor/bin/drush cr
+19. Theme setup. Go to the terminal >> cd public_html/docroot/themes/custom/yukonca_glider/
+20. Assuming that the correct node version is already installed run >> npm run build
+21. Go to the terminal >> public_html and clear cache >>  ./vendor/bin/drush cr
+22. Import French translations by hitting <root domain>/admin/config/regional/translate/import. On this admim interface, select the fr.po file, select "French" in the dropdown, check the three boxes and click upload.
+22. Migration process is complete at this point.
+23. If some files are not working, then manually replacing the files folder with the D7 version can fix those errors. 
+24. We need to add "More on Yukon.ca" Hamburger menu 
+
+
+## Extra Step-1: (Only required where URL carries /docroot in the URL)
+
+/docroot/themes/custom/yukonca_glider/patterns/organisms/footer/scss/styles.scss
+Line 6 >> remove /docroot
+
+/docroot/themes/custom/yukonca_glider/src/js/custom.js
+Line 18 >> remove /docroot
+
+
+## Extra Step-2: (Only required node is not installed or version is incorrect)
+
+Node Installation followed by theme setup:
+
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+nvm --version
+nvm install 16
+nvm install 18
+
+Theme setup
+nvm use v16.16.0
+npm install
+nvm use v18
+npm run build
+
+## How to arrange the of Homepage item boxes:
+
+Edit Homepage and drag the "Primary item blocks" and "Secondary item blocks" up and down as required. Click "Save".
 
 ## Migrating the data from Yukon.ca Drupal 7 version to Drupal 10
 
@@ -63,50 +139,23 @@ Once blank Drupal 10 website is done, data import can be initiated by adding dat
 
 ## Migration - Overall process
 
-There are more than 30K nodes on the D7 version and it can take anywhere between 10 to 15 hours to run the complete migration.  The speed of migration depends on the server (both D7 and D10) and on the size of data. It needs manual monitoring and validation to confirm that data migration was completed as required. To make this process feasible, the migration process has been divided into 10 batches and we need to run this migration at least two times (10 batches x 2 times). In the first round we get the migration data and in the second round, we fix the missing relationships between the nodes.    
- 
-### Migration - 1st Round to migrate initial data
+There are more than 30K nodes on the D7 version and it can take anywhere between 10 to 15 hours to run the complete migration.  The speed of migration depends on the server (both D7 and D10) and on the size of data. It needs manual monitoring and validation to confirm that data migration was completed as required. To make this process feasible, the migration process has been divided into 11 batches and we need to run this migration at least two times (11 batches x 2 times). In the first round we get the migration data and in the second round, we fix the missing relationships between the nodes.
 
-Running the following 10 commands will import the data from Drupal 7 to Druapl 10. Please note that this is the start of migration where Drupal 10 has no data from the production website. Running these commands for the second time is recommended only if data import was not complete or got corrupted. Partial imports can be done by running individual commands where all previous node IDs will be updated (assigned new).
+### Migration - Prep D7 source database
 
-```
-./vendor/bin/drush migrate:import --group=legacy_taxonomies --continue-on-failure
-./vendor/bin/drush migrate:import --group=legacy_media --continue-on-failure
-./vendor/bin/drush migrate:import --group=legacy_paragraphs --continue-on-failure
-./vendor/bin/drush migrate:import --group=legacy_nodes --continue-on-failure
-./vendor/bin/drush migrate:import --group=legacy_documents --continue-on-failure
-./vendor/bin/drush migrate:import --group=legacy_basic_page --continue-on-failure
-./vendor/bin/drush migrate:import --group=legacy_page_news --continue-on-failure
-./vendor/bin/drush migrate:import --group=legacy_user_role --continue-on-failure
-./vendor/bin/drush migrate:import --group=legacy_menu continue-on-failure
-./vendor/bin/drush migrate:import --group=legacy_files --continue-on-failure
-```
+To fix an issue with Paragraph revisions, run the `d7-queries.sql` against the source DB.
 
-The script `migrate_initial.sh` does the above.
+  drush sql:query --database=migrate --file=d7-queries.sql
+
+### Migration - Initial and update
+
+The script `migrate_initial_and_update_w3.sh` does an initial import, and the two subsequent updates, along with some other minor tweaks.
 
 ### Reset migration in case of failure
 
-Migrations can fail to complete due to multiple reasons and when it happens, it display the name of the table for which migration stopped working.  Rerunning (resume) the migration is only possible after resetting the migration using a command like below where “yukon_migrate_landing_page” is the name of the failed table. 
+Migrations can fail to complete due to multiple reasons and when it happens, it display the name of the table for which migration stopped working.  Rerunning (resume) the migration is only possible after resetting the migration using a command like below where “yukon_migrate_landing_page” is the name of the failed table.
 
     ./vendor/bin/drush migrate:reset-status yukon_migrate_landing_page
-
-
-### Update - 2nd Round to update relationships
-
-```
-./vendor/bin/drush migrate:import --group=legacy_taxonomies --update --continue-on-failure
-./vendor/bin/drush migrate:import --group=legacy_media --update --continue-on-failure
-./vendor/bin/drush migrate:import --group=legacy_paragraphs --update --continue-on-failure
-./vendor/bin/drush migrate:import --group=legacy_nodes --update --continue-on-failure
-./vendor/bin/drush migrate:import --group=legacy_documents --update --continue-on-failure
-./vendor/bin/drush migrate:import --group=legacy_basic_page --update --continue-on-failure
-./vendor/bin/drush migrate:import --group=legacy_page_news --update --continue-on-failure
-./vendor/bin/drush migrate:import --group=legacy_user_role --update --continue-on-failure
-./vendor/bin/drush migrate:import --group=legacy_menu --update --continue-on-failure
-./vendor/bin/drush migrate:import --group=legacy_files --update --continue-on-failure
-```
-
-The script `migrate_update.sh` does the above.
 
 Running the above commands more than once is recommended.
 
@@ -123,6 +172,19 @@ npm run build command inside [web-root]/docroot/themes/custom/yukonca_glider
 Clear Drupal cache using drush cr
 
 Drupal 10 website should be ready at this point
+
+
+## Things to be confirmed post-migration ##
+
+
+## Know Issues ##
+
+1.. Some links on D7 production have inconsistent French translation.
+https://yukon.ca/en/node/153
+
+2.. Incorrect translation (English has French content and this exists on production as well):
+https://yukon.ca/en/Dates-limites-des-depots-pour-municipalites
+
 
 ----------------------------------
 ----------------------------------

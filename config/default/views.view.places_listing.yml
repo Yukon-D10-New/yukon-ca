@@ -251,13 +251,13 @@ display:
           sort_asc_label: Asc
           sort_desc_label: Desc
           text_input_required: 'Select any filter and click on Apply to see results'
-          text_input_required_format: basic_html
+          text_input_required_format: full_html
           bef:
             general:
               autosubmit: true
               autosubmit_exclude_textfield: false
               autosubmit_textfield_delay: 500
-              autosubmit_hide: false
+              autosubmit_hide: true
               input_required: false
               allow_secondary: false
               secondary_label: 'Advanced options'
@@ -271,6 +271,10 @@ display:
                   collapsible: false
                   collapsible_disable_automatic_open: false
                   is_secondary: false
+                options_show_only_used: false
+                options_show_only_used_filtered: false
+                options_hide_when_empty: false
+                options_show_items_count: false
               field_community_facility_type_target_id:
                 plugin_id: default
                 advanced:
@@ -281,6 +285,10 @@ display:
                   collapsible: false
                   collapsible_disable_automatic_open: false
                   is_secondary: false
+                options_show_only_used: false
+                options_show_only_used_filtered: false
+                options_hide_when_empty: false
+                options_show_items_count: 0
               field_community_target_id:
                 plugin_id: default
                 advanced:
@@ -290,6 +298,10 @@ display:
                   collapsible: false
                   collapsible_disable_automatic_open: false
                   is_secondary: false
+                options_show_only_used: false
+                options_show_only_used_filtered: false
+                options_hide_when_empty: false
+                options_show_items_count: 0
       access:
         type: perm
         options:
@@ -299,6 +311,21 @@ display:
         options: {  }
       empty: {  }
       sorts:
+        title:
+          id: title
+          table: node_field_data
+          field: title
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: title
+          plugin_id: standard
+          order: ASC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
         created:
           id: created
           table: node_field_data
@@ -463,7 +490,7 @@ display:
           admin_label: ''
           plugin_id: taxonomy_index_tid
           operator: or
-          value: null
+          value: {  }
           group: 1
           exposed: true
           expose:
@@ -507,7 +534,7 @@ display:
             group_items: {  }
           reduce_duplicates: true
           vid: community
-          type: cshs
+          type: select
           hierarchy: false
           limit: true
           error_message: true
@@ -562,6 +589,10 @@ display:
             group_items: {  }
       style:
         type: default
+        options:
+          grouping: {  }
+          row_class: places-list-item
+          default_row_class: true
       row:
         type: fields
       query:
@@ -619,7 +650,7 @@ display:
       exposed_block: true
       display_extenders:
         ajax_history:
-          enable_history: false
+          enable_history: true
       block_description: 'Places listing'
     cache_metadata:
       max-age: -1

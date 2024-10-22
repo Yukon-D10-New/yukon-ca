@@ -1,5 +1,11 @@
 /* Styles for Documents search-page. */
 .path-forms {
+    main {
+        .row {
+            @apply pt-0;
+        }
+    }
+    
 	.page-title {
 		@apply mb-6 text-3.5xl pb-[5px];
 	}
@@ -7,8 +13,10 @@
 	.view {
 		.view-content {
 			.views-row {
+			    @apply py-2.5;
+			    
 				&:last-child {
-				@apply border-b border-solid border-gray-lightborder;
+				    @apply border-b border-solid border-gray-lightborder;
 				}
 
 				.views-field-title {
@@ -41,10 +49,6 @@
 					}
 				}
 			}
-		}
-
-		.pager {
-			@apply border-b border-solid border-gray-lightborder;
 		}
 	}
 }

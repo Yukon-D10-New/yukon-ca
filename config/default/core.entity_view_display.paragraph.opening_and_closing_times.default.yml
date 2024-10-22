@@ -7,19 +7,18 @@ dependencies:
     - field.field.paragraph.opening_and_closing_times.field_opening_time
     - paragraphs.paragraphs_type.opening_and_closing_times
   module:
-    - datetime
     - fences
+    - time_field
 id: paragraph.opening_and_closing_times.default
 targetEntityType: paragraph
 bundle: opening_and_closing_times
 mode: default
 content:
   field_closing_time:
-    type: datetime_default
-    label: above
+    type: time_formatter
+    label: hidden
     settings:
-      timezone_override: ''
-      format_type: medium_format
+      time_format: 'g:i a'
     third_party_settings:
       fences:
         fences_field_tag: div
@@ -30,14 +29,13 @@ content:
         fences_field_item_classes: ''
         fences_label_tag: div
         fences_label_classes: ''
-    weight: 1
+    weight: 3
     region: content
   field_opening_time:
-    type: datetime_default
-    label: above
+    type: time_formatter
+    label: hidden
     settings:
-      timezone_override: ''
-      format_type: medium_format
+      time_format: 'g:i a'
     third_party_settings:
       fences:
         fences_field_tag: div
@@ -48,7 +46,7 @@ content:
         fences_field_item_classes: ''
         fences_label_tag: div
         fences_label_classes: ''
-    weight: 0
+    weight: 2
     region: content
 hidden:
   search_api_excerpt: true

@@ -49,13 +49,13 @@ set classes = [
 
 {% block paragraph %}
 	{% block content %}
-		<div class="campaign-section campaign-text-only flex justify-center paragraph--type--text">
+		<div class="campaign-section campaign-text-only flex justify-center paragraph--type--text" id="{{ paragraph.field_title.value|replace({' ': '-'}) }}">
 			<div class="w-8/12">
 				<div class="campaign-text-only-wrapper">
 					{% if paragraph.field_display_section_title.value == '1' %}
 						<h2 class="title-design-1">{{ paragraph.field_title.value|raw }}</h2>
 					{% endif %}
-					{{ paragraph.field_section_content.value|raw }}
+					{{ content.field_section_content }}
 				</div>
 			</div>
 		</div>

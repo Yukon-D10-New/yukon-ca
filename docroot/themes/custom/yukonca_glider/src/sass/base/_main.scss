@@ -41,8 +41,12 @@ h1#heading {
   &--image {
     @apply min-h-[120px] flex items-center;
 
+    .image {
+        @apply z-10;
+    }
+    
     #heading {
-      @apply font-medium;
+      @apply font-medium max-w-[calc(60%-80px)] z-10;
     }
   }
 }
@@ -83,6 +87,16 @@ h1#heading {
 
 /* End Issue 183 */
 
+[lang="fr"] {
+    .field--label-inline {
+        .field__label {
+            &:after {
+                @apply pl-2;
+            }
+        }
+    }
+}
+
 .field {
   &.field--name-field-popular-links {
     .field__item {
@@ -100,7 +114,7 @@ h1#heading {
     }
   }
   
-&.news-field-featured-image {
+  &.news-field-featured-image {
     img {
       @apply float-right ml-24 mb-12;
     }
@@ -160,16 +174,68 @@ h1#heading {
 }
 
 .page-node-type-basic-page {
+    aside {
+        .filters {
+            form {
+                select {
+                    @apply text-[#555555];
+                }
+            }
+        }
+    }
+    
+    .carousel {
+        @apply min-h-[375px];
+
+        .carousel-item {
+            @apply min-h-[375px];
+
+            div {
+                @apply min-h-[375px];
+            }
+            
+            img {
+                max-width: 100% !important;
+            }
+            
+            .field--name-field-title {
+                @apply text-[22px] leading-1.1;
+            }
+        }
+        
+        .featured-btn-group {
+            button {
+                @apply border-gray-lightborder h-9 opacity-100;
+
+                &.prev {
+                    margin-right: 2px;
+                }
+                
+                svg {
+                    @apply w-2
+                }
+            }
+        }
+
+        .field--name-field-image-gallery {
+            @apply h-full;
+
+            .media--type-image {
+                margin: 0 !important;
+            }
+        }
+    }
+    
   .region {
     &.region-content {
       @apply pt-3.75;
+        
+      h2 {
+        @apply pt-10 mt-3.75 mb-[11px] text-[26px] leading-1.1;
+      }
 
       .node--type-basic-page {
           .node__content {
-            >h2 {
-              @apply pt-10 mt-3.75 mb-[11px] text-[26px] leading-1.1;
-            }
-      
             >p {
               @apply mb-[11px];
             }
@@ -182,12 +248,10 @@ h1#heading {
               @apply my-7.5;
       
               .field__label {
-                @apply mt-3.75 mb-0 text-lg border-b-1 border-gray-lightborder;
+                @apply my-3.75 text-lg border-b-1 border-gray-lightborder;
               }
     
               .field__item {
-                @apply mt-3.75;
-    
                 a {
                   display: block;
                   @apply py-2.5;
@@ -195,13 +259,113 @@ h1#heading {
               }
             }
           }
+          
+          .media {
+              @apply flex flex-col items-center;
+
+              img {
+                  @apply max-w-[300px];
+
+                  &.media-wysiwyg-align-right {
+                      @apply float-right;
+                  }
+              }
+              
+              &.media-wysiwyg-align-right {
+                  @apply float-right;
+              }
+              
+              &.media-wysiwyg-align-center {
+                  @apply mx-auto text-center;
+              }
+          }
+
+          article {
+              :not(.carousel) {
+                  &.media--type-image {
+                      @apply float-right ml-[100px] mb-[50px];
+                      
+                      @include media-breakpoint-down(md) {
+                        @apply float-none ml-5;
+                      }
+                      
+                      img {
+                        @apply max-w-[300px] h-auto;
+                      }
+                  }
+              }
+          }
         }
 
       .page-title {
         @apply text-3.5xl mt-[15px] mb-[23px] pb-[5px];
-      }
+       }
+      
+        .block-views-blockevents-listing-block-events-listing {
+            .block-title {
+                @apply mt-3.75 mb-3 text-[26px];
+            }
+        }
+        
+        .view-find-a-campground-or-recreation-site {
+            .views-row {
+                .node--type-campground-directory-record {
+                    @apply border-b-0 border-t-1 border-gray-lightborder;
+    
+                    .graph-card {
+                        @apply my-0;
+                        
+                        .main-link {
+                            @apply text-lg leading-1.1;
+                            
+                            a:hover {
+                                @apply hover:underline hover:text-blue-500;
+                            }
+                        }
+                    }
+                }
+                
+                &:last-child {
+                    .node--type-campground-directory-record {
+                        @apply border-b-1 border-gray-lightborder;
+                    }
+                }
+            }
+        }
     }
   }
+}
+
+.view-events-listing,
+.view-places-listing,
+.view-documents-browse {
+    .applied-filters {
+        @apply mb-4 mt-[6px];
+        
+        .section-title {
+            @apply mb-2 leading-1.1;
+        }
+        
+        .applied-items {
+            .applied-item {
+                @apply relative border border-blue-400 rounded no-underline text-base font-medium inline-block text-blue-400 mb-2 ml-4 py-1.5 pl-3 pr-[38px];
+                @apply hover:text-blue-50 hover:border-blue-50;
+                
+                &:after {
+                    @apply absolute text-sm right-3;
+                    content: "\e014";
+                    font-family: "Glyphicons Halflings", sans-serif;
+                    top: calc(50% - 10px);
+                }
+            }
+        }
+    }
+        
+    .filter-content {
+        .view-empty {
+            @apply pt-[35px] border-t-1 border-gray-lightborder;
+        }
+    }
 }
 
 .webform-submission-page-feedback-node-8252-form {
@@ -230,29 +394,6 @@ h1#heading {
   }
 }
 
-// Homepage
-.page-node-type-homepage {
-  #image-gallery {
-    .field {
-      &.field--name-field-image-gallery {
-        .carousel-item {
-          .slide-content {
-            .field--name-field-description-plain {
-              @apply mb-[11.5px];
-            }
-
-            .field--type-link {
-              a {
-                @apply font-medium;
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
 .js {
   .js-form-wrapper {
     .js-hide {
@@ -264,3 +405,4 @@ h1#heading {
 /* End Custom SCSS */
 
 @import "partials/accordion";
+@import "partials/peak-times-graph";

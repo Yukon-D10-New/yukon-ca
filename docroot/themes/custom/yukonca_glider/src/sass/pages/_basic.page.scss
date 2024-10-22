@@ -1,16 +1,68 @@
+.page-node-type-basic-page {
+    h3 {
+        @apply text-[22px] leading-1.1 mt-3.75 pt-5;
+    }
+    
+    .region-content {
+        ul,
+        ol {
+            @apply pl-12;
+            
+            li {
+                @apply pl-2.5;
+            }
+        }
+        
+        ul {
+            @apply list-disc;
+        }
+    }
+}
+
 main {
 	> .row {
 		@apply pt-[60px];
 
 		.layout-content {
 			.region-content {
-				@apply pt-0;
+				@apply pt-0 pb-8 relative;
+				
+				table {
+                    @apply border border-gray-600 w-full mb-6;
 
-				.block {
-					&.block-system-main-block {
-						@apply mt-3.75 mb-12 inline-block w-full;
-					}
+                    tbody {
+                        tr {
+                            td {
+                                @apply border border-gray-600 p-2;
+                            }
+                        }
+                    }
 				}
+				
+				// .media {
+				//     img {
+				//         @apply w-[300px];
+				//     }
+				// }
+				
+				// .field--name-field-image {
+				//     @apply absolute right-0 ml-[100px] mb-[50px];
+
+				//     img {
+				//         @apply w-[300px] h-auto;
+				//     }
+				// }
+
+				// .node__content {
+				//     p {
+				//         &:nth-child(1),
+				//         &:nth-child(2),
+				//         &:nth-child(3),
+				//         &:nth-child(4) {
+				//             @apply max-w-3xl;
+				//         }
+				//     }
+				// }
 			}
 
 			.block-views-blockplaces-listing-block-places-listing {

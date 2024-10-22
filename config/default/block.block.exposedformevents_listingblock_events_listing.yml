@@ -25,4 +25,4 @@ visibility:
   request_path:
     id: request_path
     negate: false
-    pages: /arts-and-culture/events
+    pages: "/arts-and-culture/events\r\n/arts-et-culture/activites"

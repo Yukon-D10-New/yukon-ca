@@ -60,7 +60,7 @@
 
   {{ page.secondary_menu }}
 
-  {{ page.breadcrumb }}
+<div id="w3-parsing">  
 
   {{ page.pre_content }}
 
@@ -71,11 +71,12 @@
   </div>
 
   <main role="main" class="container-lg grow">
+      {{ page.breadcrumb }}
     <a id="main-content" tabindex="-1"></a>{# link is in html.html.twig #}
 
     <div class="row">
       {% if page.sidebar_first %}
-        <aside class="layout-sidebar-first col-sm-3 col-lg-4 px-3.5 lg:pr-20" role="complementary">
+        <aside class="layout-sidebar-first col-sm-3 col-lg-3 px-3.5" role="complementary">
           {{ page.sidebar_first }}
         </aside>
       {% endif %}
@@ -88,7 +89,7 @@
         </aside>
       {% endif %}
 
-      <div class="layout-content {{ (page.sidebar_first or page.sidebar_second) ? 'col-sm-9 col-lg-8' : '' }} px-3.5">
+      <div class="layout-content {{ (page.sidebar_first or page.sidebar_second) ? 'col-sm-9 col-lg-8 offset-md-1' : '' }} px-3.5">
         {% if node.type[0].target_id == 'blog' %}
           {% set defualt_logo %}
               <img src="{{ '/' ~ active_theme_path() ~ '/logo.svg' }}">
@@ -118,7 +119,7 @@
     {% endif %}
 
   </main>
-
+</div>
    {% if page.footer_logo or page.footer_menu or page.footer_legal %}
     {{ pattern('footer', {
       logo: Footer_logo,

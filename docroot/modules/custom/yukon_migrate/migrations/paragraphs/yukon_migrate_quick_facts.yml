@@ -22,7 +22,7 @@ process:
   #  plugin: yukon_migrate_uri_transform
   #  method: transformUri
   #  source: field_facts/0/value
-  field_facts/format: constants/default_text_format
+  # field_facts/format: constants/default_text_format
 
 destination:
   plugin: entity_reference_revisions:paragraph
