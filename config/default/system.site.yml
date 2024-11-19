@@ -1,14 +1,14 @@
 _core:
   default_config_hash: l58O_yEXSo-SeJi19LXdzTU1tNJG3lmnIhCitRkM1tk
 langcode: en
-uuid: fac63e8d-8670-449d-9954-425981f0f09f
+uuid: 0aee363c-d429-4f9f-ae4d-30e55e7f0411
 name: Yukon.ca
 mail: noreply@evolvingweb.com
 slogan: ''
 page:
   403: ''
-  404: /search404
-  front: /home
+  404: /node/6454
+  front: /node/51
 admin_compact_mode: false
 weight_select_max: 100
 default_langcode: en

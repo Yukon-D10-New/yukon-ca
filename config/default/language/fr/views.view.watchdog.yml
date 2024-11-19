@@ -1,18 +1,10 @@
-description: 'Entrées récentes du journal'
 display:
   default:
     display_title: 'Par défaut'
     display_options:
-      title: 'Entrées récentes du journal'
       fields:
-        nothing:
-          admin_label: Icône
-        severity:
-          label: Importance
-        name:
-          label: Utilisateur
-        link:
-          label: Actions
+        timestamp:
+          label: Date
       pager:
         options:
           expose:
@@ -21,14 +13,7 @@ display:
             offset_label: Décalage
       exposed_form:
         options:
-          submit_button: Filtrer
           reset_button_label: Réinitialiser
           exposed_sorts_label: 'Trier par'
-      empty:
-        area:
-          admin_label: "Aucune entrée du journal n'est disponible."
-          content: "Aucune entrée du journal n'est disponible."
-      filters:
-        severity:
-          expose:
-            label: Importance
+  page:
+    display_title: Page

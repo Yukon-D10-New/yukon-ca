@@ -18,14 +18,12 @@ settings:
       - bulletedList
       - numberedList
       - drupalMedia
-      - indent
-      - outdent
+      - drupalInsertImage
       - blockQuote
       - link
       - undo
       - redo
       - insertTable
-      - removeFormat
       - anchor
       - horizontalLine
       - superscript
@@ -49,19 +47,36 @@ settings:
         - heading4
         - heading5
         - heading6
+    ckeditor5_imageResize:
+      allow_resize: true
     ckeditor5_list:
       properties:
         reversed: true
         startIndex: true
       multiBlock: true
+    ckeditor5_plugin_pack_find_and_replace__find_and_replace:
+      ui_type: dialog
     ckeditor5_show_block_show_block:
       enable_show_block_default: 0
     ckeditor5_sourceEditing:
       allowed_tags: {  }
+    ckeditor_media_resize_mediaResize:
+      apply_image_styles: false
+      image_styles:
+        - cke_media_resize_small
+        - cke_media_resize_medium
+        - cke_media_resize_large
+        - cke_media_resize_xl
     linkit_extension:
       linkit_enabled: true
       linkit_profile: ckeditor
     media_media:
-      allow_view_mode_override: false
+      allow_view_mode_override: true
 image_upload:
-  status: false
+  status: true
+  scheme: public
+  directory: inline-images
+  max_size: null
+  max_dimensions:
+    width: null
+    height: null

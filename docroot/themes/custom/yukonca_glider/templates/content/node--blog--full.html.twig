@@ -80,6 +80,13 @@
 {{ attach_library('classy/node') }}
 <article{{ attributes.addClass(classes) }}>
   {{ title_prefix }}
+  
+  {% if six_months_old  %}
+    <div class="older-blog-post">
+      <div class="blog-text-red">{{ 'This post is older than 6 months.'|t }}</div>
+    </div>
+  {% endif %}
+  
   {% if label and not page %}
     <h2{{ title_attributes }}>
       <a href="{{ url }}" rel="bookmark">{{ label }}</a>
@@ -89,7 +96,12 @@
 
   <div class="blog-credits mb-8">
     {{ 'By'|t }} {{ node.owner.name.value ? node.owner.name.value : author_name }}
-    <div class="text-gray">{{ node.getCreatedTime() | date("F j, Y") }}</div>
+    {% if lang == "en" %}
+        <div class="text-gray">{{ node.getCreatedTime() | date("F j, Y") }}</div>
+    {% endif %}
+    {% if lang == "fr" %}
+        <div class="text-gray">{{ node.getCreatedTime() | date("j") }} {{ node.getCreatedTime() | date("F")|t }} {{ node.getCreatedTime() | date("Y") }}</div>
+    {% endif %}
   </div>
 
   <div{{ content_attributes.addClass('node__content') }}>

@@ -2,10 +2,16 @@ uuid: 6deef971-d1f9-4631-ba92-eea8c0e94d46
 langcode: en
 status: true
 dependencies:
+  config:
+    - core.entity_view_mode.media.cke_media_resize_large
+    - core.entity_view_mode.media.cke_media_resize_medium
+    - core.entity_view_mode.media.cke_media_resize_small
+    - core.entity_view_mode.media.cke_media_resize_xl
   module:
+    - ckeditor_media_resize
     - editor
     - linkit
-    - media
+    - media_embed_extra
     - pathologic
 _core:
   default_config_hash: hewPmBgni9jlDK_IjLxUx1HsTbinK-hdl0lOwjbteIY
@@ -17,74 +23,103 @@ filters:
     id: editor_file_reference
     provider: editor
     status: true
-    weight: 11
+    weight: -47
     settings: {  }
   filter_align:
     id: filter_align
     provider: filter
+    status: true
+    weight: -41
+    settings: {  }
+  filter_autop:
+    id: filter_autop
+    provider: filter
     status: false
-    weight: 8
+    weight: -39
     settings: {  }
   filter_caption:
     id: filter_caption
     provider: filter
     status: false
-    weight: 9
+    weight: -38
     settings: {  }
   filter_html:
     id: filter_html
     provider: filter
     status: false
-    weight: -10
+    weight: -42
     settings:
       allowed_html: ''
       filter_html_help: false
       filter_html_nofollow: false
+  filter_html_escape:
+    id: filter_html_escape
+    provider: filter
+    status: false
+    weight: -40
+    settings: {  }
+  filter_html_image_secure:
+    id: filter_html_image_secure
+    provider: filter
+    status: false
+    weight: -37
+    settings: {  }
   filter_htmlcorrector:
     id: filter_htmlcorrector
     provider: filter
     status: true
-    weight: 10
+    weight: -48
     settings: {  }
   filter_image_lazy_load:
     id: filter_image_lazy_load
     provider: filter
     status: true
-    weight: 12
+    weight: -46
     settings: {  }
   filter_pathologic:
     id: filter_pathologic
     provider: pathologic
     status: true
-    weight: 50
+    weight: -45
     settings:
       settings_source: local
       local_settings:
         protocol_style: full
-        local_paths: "/en/\r\n/fr/\r\nhttps://yukon.ca/en/\r\nhttps://yukon.ca/fr/"
+        local_paths: ''
         keep_language_prefix: true
+  filter_resize_media:
+    id: filter_resize_media
+    provider: ckeditor_media_resize
+    status: false
+    weight: -44
+    settings: {  }
   filter_url:
     id: filter_url
     provider: filter
     status: true
-    weight: 0
+    weight: -50
     settings:
       filter_url_length: 72
   linkit:
     id: linkit
     provider: linkit
     status: true
-    weight: 0
+    weight: -49
     settings:
       title: true
   media_embed:
     id: media_embed
-    provider: media
+    provider: media_embed_extra
     status: true
-    weight: 100
+    weight: -43
     settings:
       default_view_mode: default
       allowed_view_modes:
         default: default
+        cke_media_resize_large: cke_media_resize_large
+        cke_media_resize_medium: cke_media_resize_medium
+        cke_media_resize_small: cke_media_resize_small
+        cke_media_resize_xl: cke_media_resize_xl
       allowed_media_types:
+        audio: audio
         image: image

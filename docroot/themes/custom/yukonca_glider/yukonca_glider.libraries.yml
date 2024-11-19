@@ -17,13 +17,15 @@ bootstrap:
 global_styles:
   css:
     theme:
-      dist/css/font-awesome.css: {}
+      src/css/font-awesome.css: {}
       dist/css/styles.min.css: { minified: true }
   js:
     dist/js/theme.min.js: { minified: true }
+    src/js/custom.js: {}
   dependencies:
     - core/jquery
     - core/drupal
+    - core/once
 
 administrator:
   css:

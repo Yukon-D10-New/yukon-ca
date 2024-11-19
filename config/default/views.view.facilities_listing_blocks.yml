@@ -8,22 +8,26 @@ dependencies:
     - taxonomy.vocabulary.education_facilities
     - taxonomy.vocabulary.health_facilities
     - taxonomy.vocabulary.sanitary_facilities
+    - taxonomy.vocabulary.school_board_type
   content:
-    - 'taxonomy_term:community_facilities:1e1763c5-91f4-447d-a445-057fbbe35b18'
-    - 'taxonomy_term:community_facilities:318ff2d0-5c30-4e8d-a81d-5a96d0c835e7'
-    - 'taxonomy_term:community_facilities:5a904fb7-9f70-43fe-9e14-4dc2b636f57f'
-    - 'taxonomy_term:community_facilities:8891fb2b-866f-451d-aa56-11aa3a810b3e'
-    - 'taxonomy_term:community_facilities:b0f32d4c-e44d-4d19-b9e3-0b10ef9e464c'
-    - 'taxonomy_term:community_facilities:b391cce3-d76b-4bc9-b0e9-7f13b662a9e4'
-    - 'taxonomy_term:community_facilities:f9d609af-6d50-4ab6-b50c-fe7802af1dbd'
-    - 'taxonomy_term:education_facilities:f2f17c5a-7e90-41ee-ae73-30706ed17638'
-    - 'taxonomy_term:education_facilities:f55e6294-d908-4163-ab70-8e69a49bbe70'
-    - 'taxonomy_term:health_facilities:65dd8a01-5726-42b2-80c3-6f17998d2420'
-    - 'taxonomy_term:health_facilities:b9f04296-9820-4e52-8697-a36c625a1f4e'
-    - 'taxonomy_term:health_facilities:d32850b4-9f0d-4799-b87b-870f7ae5a97b'
-    - 'taxonomy_term:sanitary_facilities:7652b2c5-ad1c-45d8-8672-8f1e770be1ce'
-    - 'taxonomy_term:sanitary_facilities:cf75324d-939f-4864-af72-2fc44d791fa5'
-    - 'taxonomy_term:sanitary_facilities:ffe76513-eec7-4211-9d78-62a492036ec0'
+    - 'taxonomy_term:community_facilities:00f3d1b3-94a8-4b28-a8d9-e17abcdd7cc2'
+    - 'taxonomy_term:community_facilities:35d519bd-5c9a-40bd-a2f1-4af58f5c2699'
+    - 'taxonomy_term:community_facilities:4f702452-a3b4-4967-a8a3-c0a9e6a57c9a'
+    - 'taxonomy_term:community_facilities:563df129-42b3-4906-a0f3-c5b9d142605a'
+    - 'taxonomy_term:community_facilities:9e5cabdb-1884-4a94-8144-1bbcb90ff822'
+    - 'taxonomy_term:community_facilities:d422a966-3f59-4d09-a4a4-7e83da71b2e5'
+    - 'taxonomy_term:community_facilities:d5173e4b-3225-4de2-8638-45ff6e0bff42'
+    - 'taxonomy_term:education_facilities:20314cce-519f-4620-9e1b-eef146d539ca'
+    - 'taxonomy_term:education_facilities:96fa3409-1b47-4984-b984-de35cc868250'
+    - 'taxonomy_term:health_facilities:3c3fc58e-fcc9-4a55-80ef-d764c7f26dfb'
+    - 'taxonomy_term:health_facilities:4067608c-2e7f-4056-9031-e96fbf4563f1'
+    - 'taxonomy_term:health_facilities:a633be8d-4479-410e-b39f-bf5e4f3795f7'
+    - 'taxonomy_term:sanitary_facilities:240494c7-2168-44fc-9d12-6fe8fe8f1589'
+    - 'taxonomy_term:sanitary_facilities:a11507d1-c76b-4923-9feb-fce1620b1568'
+    - 'taxonomy_term:sanitary_facilities:eceab375-0aa3-4912-bb9a-de67d8d099e5'
+    - 'taxonomy_term:school_board_type:0d340843-057a-42c1-bfc0-70aa690d4624'
+    - 'taxonomy_term:school_board_type:809d7cf4-96a2-439f-b0af-da3fffa768bb'
+    - 'taxonomy_term:school_board_type:ca075419-c0cb-47b1-9e8a-a69d523aa01e'
   module:
     - node
     - paragraphs
@@ -310,7 +314,7 @@ display:
           plugin_id: taxonomy_index_tid
           operator: or
           value:
-            355: 355
+            59: 59
           group: 1
           exposed: false
           expose:
@@ -353,6 +357,48 @@ display:
           hierarchy_depth: 0
           required_depth: 0
           none_label: '- Please select -'
+        langcode:
+          id: langcode
+          table: node_field_data
+          field: langcode
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: langcode
+          plugin_id: language
+          operator: in
+          value:
+            '***LANGUAGE_language_interface***': '***LANGUAGE_language_interface***'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
       filter_groups:
         operator: AND
         groups:
@@ -409,7 +455,7 @@ display:
           plugin_id: taxonomy_index_tid
           operator: or
           value:
-            284: 284
+            52: 52
           group: 1
           exposed: false
           expose:
@@ -508,7 +554,7 @@ display:
           plugin_id: taxonomy_index_tid
           operator: or
           value:
-            285: 285
+            53: 53
           group: 1
           exposed: false
           expose:
@@ -551,6 +597,48 @@ display:
           hierarchy_depth: 0
           required_depth: 0
           none_label: '- Please select -'
+        langcode:
+          id: langcode
+          table: node_field_data
+          field: langcode
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: langcode
+          plugin_id: language
+          operator: in
+          value:
+            '***LANGUAGE_language_interface***': '***LANGUAGE_language_interface***'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
       filter_groups:
         operator: AND
         groups:
@@ -607,7 +695,7 @@ display:
           plugin_id: taxonomy_index_tid
           operator: or
           value:
-            286: 286
+            54: 54
           group: 1
           exposed: false
           expose:
@@ -706,7 +794,7 @@ display:
           plugin_id: taxonomy_index_tid
           operator: or
           value:
-            278: 278
+            60: 60
           group: 1
           exposed: false
           expose:
@@ -805,7 +893,7 @@ display:
           plugin_id: taxonomy_index_tid
           operator: or
           value:
-            280: 280
+            62: 62
           group: 1
           exposed: false
           expose:
@@ -904,7 +992,148 @@ display:
           plugin_id: taxonomy_index_tid
           operator: or
           value:
-            286: 286
+            54: 54
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          vid: community_facilities
+          type: select
+          hierarchy: false
+          limit: true
+          error_message: true
+          save_lineage: false
+          force_deepest: false
+          parent: null
+          level_labels: ''
+          hierarchy_depth: 0
+          required_depth: 0
+          none_label: '- Please select -'
+        langcode:
+          id: langcode
+          table: node_field_data
+          field: langcode
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: langcode
+          plugin_id: language
+          operator: in
+          value:
+            '***LANGUAGE_language_interface***': '***LANGUAGE_language_interface***'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      defaults:
+        filters: false
+        filter_groups: false
+      display_description: ''
+      display_extenders:
+        ajax_history: {  }
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - 'user.node_grants:view'
+        - user.permissions
+      tags: {  }
+  block_16:
+    id: block_16
+    display_title: 'Interpretive centres'
+    display_plugin: block
+    position: 16
+    display_options:
+      filters:
+        status:
+          id: status
+          table: node_field_data
+          field: status
+          entity_type: node
+          entity_field: status
+          plugin_id: boolean
+          value: '1'
+          group: 1
+          expose:
+            operator: ''
+        type:
+          id: type
+          table: node_field_data
+          field: type
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+          value:
+            directory_records_places: directory_records_places
+          group: 1
+        field_community_facility_type_target_id:
+          id: field_community_facility_type_target_id
+          table: paragraph__field_community_facility_type
+          field: field_community_facility_type_target_id
+          relationship: field_places_record_type
+          group_type: group
+          admin_label: ''
+          plugin_id: taxonomy_index_tid
+          operator: or
+          value:
+            160: 160
           group: 1
           exposed: false
           expose:
@@ -965,11 +1194,11 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags: {  }
-  block_16:
-    id: block_16
-    display_title: 'Interpretive centres'
+  block_17:
+    id: block_17
+    display_title: 'Commission scolaire francophone du Yukon (CSFY)'
     display_plugin: block
-    position: 16
+    position: 6
     display_options:
       filters:
         status:
@@ -993,17 +1222,17 @@ display:
           value:
             directory_records_places: directory_records_places
           group: 1
-        field_community_facility_type_target_id:
-          id: field_community_facility_type_target_id
-          table: paragraph__field_community_facility_type
-          field: field_community_facility_type_target_id
+        field_education_facility_type_target_id:
+          id: field_education_facility_type_target_id
+          table: paragraph__field_education_facility_type
+          field: field_education_facility_type_target_id
           relationship: field_places_record_type
           group_type: group
           admin_label: ''
           plugin_id: taxonomy_index_tid
           operator: or
           value:
-            287: 287
+            56: 56
           group: 1
           exposed: false
           expose:
@@ -1034,7 +1263,490 @@ display:
             default_group_multiple: {  }
             group_items: {  }
           reduce_duplicates: false
-          vid: community_facilities
+          vid: education_facilities
+          type: select
+          hierarchy: false
+          limit: true
+          error_message: true
+          save_lineage: false
+          force_deepest: false
+          parent: null
+          level_labels: ''
+          hierarchy_depth: 0
+          required_depth: 0
+          none_label: '- Please select -'
+        langcode:
+          id: langcode
+          table: node_field_data
+          field: langcode
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: langcode
+          plugin_id: language
+          operator: in
+          value:
+            '***LANGUAGE_language_interface***': '***LANGUAGE_language_interface***'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        field_section_type_target_id:
+          id: field_section_type_target_id
+          table: paragraph__field_section_type
+          field: field_section_type_target_id
+          relationship: field_places_record_type
+          group_type: group
+          admin_label: ''
+          plugin_id: taxonomy_index_tid
+          operator: or
+          value:
+            345: 345
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          vid: school_board_type
+          type: select
+          hierarchy: false
+          limit: true
+          error_message: true
+          save_lineage: false
+          force_deepest: false
+          parent: null
+          level_labels: ''
+          hierarchy_depth: 0
+          required_depth: 0
+          none_label: '- Please select -'
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      defaults:
+        filters: false
+        filter_groups: false
+      display_description: ''
+      display_extenders:
+        ajax_history: {  }
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - 'user.node_grants:view'
+        - user.permissions
+      tags: {  }
+  block_18:
+    id: block_18
+    display_title: FNSB
+    display_plugin: block
+    position: 6
+    display_options:
+      filters:
+        status:
+          id: status
+          table: node_field_data
+          field: status
+          entity_type: node
+          entity_field: status
+          plugin_id: boolean
+          value: '1'
+          group: 1
+          expose:
+            operator: ''
+        type:
+          id: type
+          table: node_field_data
+          field: type
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+          value:
+            directory_records_places: directory_records_places
+          group: 1
+        field_education_facility_type_target_id:
+          id: field_education_facility_type_target_id
+          table: paragraph__field_education_facility_type
+          field: field_education_facility_type_target_id
+          relationship: field_places_record_type
+          group_type: group
+          admin_label: ''
+          plugin_id: taxonomy_index_tid
+          operator: or
+          value:
+            56: 56
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          vid: education_facilities
+          type: select
+          hierarchy: false
+          limit: true
+          error_message: true
+          save_lineage: false
+          force_deepest: false
+          parent: null
+          level_labels: ''
+          hierarchy_depth: 0
+          required_depth: 0
+          none_label: '- Please select -'
+        langcode:
+          id: langcode
+          table: node_field_data
+          field: langcode
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: langcode
+          plugin_id: language
+          operator: in
+          value:
+            '***LANGUAGE_language_interface***': '***LANGUAGE_language_interface***'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        field_section_type_target_id:
+          id: field_section_type_target_id
+          table: paragraph__field_section_type
+          field: field_section_type_target_id
+          relationship: field_places_record_type
+          group_type: group
+          admin_label: ''
+          plugin_id: taxonomy_index_tid
+          operator: or
+          value:
+            344: 344
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          vid: school_board_type
+          type: select
+          hierarchy: false
+          limit: true
+          error_message: true
+          save_lineage: false
+          force_deepest: false
+          parent: null
+          level_labels: ''
+          hierarchy_depth: 0
+          required_depth: 0
+          none_label: '- Please select -'
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      defaults:
+        filters: false
+        filter_groups: false
+      display_description: ''
+      display_extenders:
+        ajax_history: {  }
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - 'user.node_grants:view'
+        - user.permissions
+      tags: {  }
+  block_19:
+    id: block_19
+    display_title: 'Yukon Education'
+    display_plugin: block
+    position: 6
+    display_options:
+      filters:
+        status:
+          id: status
+          table: node_field_data
+          field: status
+          entity_type: node
+          entity_field: status
+          plugin_id: boolean
+          value: '1'
+          group: 1
+          expose:
+            operator: ''
+        type:
+          id: type
+          table: node_field_data
+          field: type
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+          value:
+            directory_records_places: directory_records_places
+          group: 1
+        field_education_facility_type_target_id:
+          id: field_education_facility_type_target_id
+          table: paragraph__field_education_facility_type
+          field: field_education_facility_type_target_id
+          relationship: field_places_record_type
+          group_type: group
+          admin_label: ''
+          plugin_id: taxonomy_index_tid
+          operator: or
+          value:
+            56: 56
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          vid: education_facilities
+          type: select
+          hierarchy: false
+          limit: true
+          error_message: true
+          save_lineage: false
+          force_deepest: false
+          parent: null
+          level_labels: ''
+          hierarchy_depth: 0
+          required_depth: 0
+          none_label: '- Please select -'
+        langcode:
+          id: langcode
+          table: node_field_data
+          field: langcode
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: langcode
+          plugin_id: language
+          operator: in
+          value:
+            '***LANGUAGE_language_interface***': '***LANGUAGE_language_interface***'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        field_section_type_target_id:
+          id: field_section_type_target_id
+          table: paragraph__field_section_type
+          field: field_section_type_target_id
+          relationship: field_places_record_type
+          group_type: group
+          admin_label: ''
+          plugin_id: taxonomy_index_tid
+          operator: or
+          value:
+            343: 343
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          vid: school_board_type
           type: select
           hierarchy: false
           limit: true
@@ -1102,7 +1814,7 @@ display:
           plugin_id: taxonomy_index_tid
           operator: or
           value:
-            354: 354
+            58: 58
           group: 1
           exposed: false
           expose:
@@ -1145,12 +1857,146 @@ display:
           hierarchy_depth: 0
           required_depth: 0
           none_label: '- Please select -'
+        langcode:
+          id: langcode
+          table: node_field_data
+          field: langcode
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: langcode
+          plugin_id: language
+          operator: in
+          value:
+            '***LANGUAGE_language_interface***': '***LANGUAGE_language_interface***'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
       filter_groups:
         operator: AND
         groups:
           1: AND
       defaults:
         title: false
+        filters: false
+        filter_groups: false
+      display_description: ''
+      display_extenders:
+        ajax_history: {  }
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - 'user.node_grants:view'
+        - user.permissions
+      tags: {  }
+  block_20:
+    id: block_20
+    display_title: Cemetery
+    display_plugin: block
+    position: 16
+    display_options:
+      filters:
+        status:
+          id: status
+          table: node_field_data
+          field: status
+          entity_type: node
+          entity_field: status
+          plugin_id: boolean
+          value: '1'
+          group: 1
+          expose:
+            operator: ''
+        type:
+          id: type
+          table: node_field_data
+          field: type
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+          value:
+            directory_records_places: directory_records_places
+          group: 1
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      defaults:
+        filters: false
+        filter_groups: false
+      display_description: ''
+      display_extenders:
+        ajax_history: {  }
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - 'user.node_grants:view'
+        - user.permissions
+      tags: {  }
+  block_21:
+    id: block_21
+    display_title: Crematorium
+    display_plugin: block
+    position: 16
+    display_options:
+      filters:
+        status:
+          id: status
+          table: node_field_data
+          field: status
+          entity_type: node
+          entity_field: status
+          plugin_id: boolean
+          value: '1'
+          group: 1
+          expose:
+            operator: ''
+        type:
+          id: type
+          table: node_field_data
+          field: type
+          entity_type: node
+          entity_field: type
+          plugin_id: bundle
+          value:
+            directory_records_places: directory_records_places
+          group: 1
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      defaults:
         filters: false
         filter_groups: false
       display_description: ''
@@ -1201,7 +2047,7 @@ display:
           plugin_id: taxonomy_index_tid
           operator: or
           value:
-            353: 353
+            57: 57
           group: 1
           exposed: false
           expose:
@@ -1244,6 +2090,48 @@ display:
           hierarchy_depth: 0
           required_depth: 0
           none_label: '- Please select -'
+        langcode:
+          id: langcode
+          table: node_field_data
+          field: langcode
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: langcode
+          plugin_id: language
+          operator: in
+          value:
+            '***LANGUAGE_language_interface***': '***LANGUAGE_language_interface***'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
       filter_groups:
         operator: AND
         groups:
@@ -1299,7 +2187,7 @@ display:
           plugin_id: taxonomy_index_tid
           operator: or
           value:
-            279: 279
+            61: 61
           group: 1
           exposed: false
           expose:
@@ -1398,7 +2286,7 @@ display:
           plugin_id: taxonomy_index_tid
           operator: or
           value:
-            349: 349
+            55: 55
           group: 1
           exposed: false
           expose:
@@ -1441,6 +2329,48 @@ display:
           hierarchy_depth: 0
           required_depth: 0
           none_label: '- Please select -'
+        langcode:
+          id: langcode
+          table: node_field_data
+          field: langcode
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: langcode
+          plugin_id: language
+          operator: in
+          value:
+            '***LANGUAGE_language_interface***': '***LANGUAGE_language_interface***'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
       filter_groups:
         operator: AND
         groups:
@@ -1497,7 +2427,7 @@ display:
           plugin_id: taxonomy_index_tid
           operator: or
           value:
-            350: 350
+            56: 56
           group: 1
           exposed: false
           expose:
@@ -1540,6 +2470,48 @@ display:
           hierarchy_depth: 0
           required_depth: 0
           none_label: '- Please select -'
+        langcode:
+          id: langcode
+          table: node_field_data
+          field: langcode
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: langcode
+          plugin_id: language
+          operator: in
+          value:
+            '***LANGUAGE_language_interface***': '***LANGUAGE_language_interface***'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
       filter_groups:
         operator: AND
         groups:
@@ -1596,7 +2568,7 @@ display:
           plugin_id: taxonomy_index_tid
           operator: or
           value:
-            281: 281
+            49: 49
           group: 1
           exposed: false
           expose:
@@ -1639,6 +2611,48 @@ display:
           hierarchy_depth: 0
           required_depth: 0
           none_label: '- Please select -'
+        langcode:
+          id: langcode
+          table: node_field_data
+          field: langcode
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: node
+          entity_field: langcode
+          plugin_id: language
+          operator: in
+          value:
+            '***LANGUAGE_language_interface***': '***LANGUAGE_language_interface***'
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
       filter_groups:
         operator: AND
         groups:
@@ -1695,7 +2709,7 @@ display:
           plugin_id: taxonomy_index_tid
           operator: or
           value:
-            282: 282
+            50: 50
           group: 1
           exposed: false
           expose:
@@ -1794,7 +2808,7 @@ display:
           plugin_id: taxonomy_index_tid
           operator: or
           value:
-            283: 283
+            51: 51
           group: 1
           exposed: false
           expose:

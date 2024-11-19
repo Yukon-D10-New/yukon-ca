@@ -61,15 +61,28 @@
                 </a>
               </div>
 
-              <div class="site-nav-toggle campaign-menu col-7 col-sm-4 col-md-6 col-lg-7 flex justify-end">
+              <div class="site-nav-toggle campaign-menu col-7 col-sm-4 col-md-6 col-lg-9 flex justify-end">
                 <ul>
                 {% for menu in campaign_menu %}
-                    <li><a class="menu-item" href="{{ menu[1] }}">{{ menu[0] }}</a></li>
+                    {% if menu[0] %}
+                        <li class="flex-1 max-w-fit tracking-[1px]">
+                            <a class="menu-item" href="{{ menu[1] }}">{{ menu[0] }}</a>
+                            {% if campaign_menu[menu[0]] %}
+                                <ul>
+                                     {% for menu_2 in campaign_menu[menu[0]] %}
+                                        <li class="flex-1 max-w-fit tracking-[1px] menu-level-2">
+                                            <a class="menu-item" href="{{ menu_2[1] }}">{{ menu_2[0] }}</a>
+                                        </li>
+                                     {% endfor %}
+                                </ul>
+                            {% endif %}
+                        </li>
+                    {% endif %}
                 {% endfor %}
                 </ul>
               </div>
               
-              <div class="site-nav-toggle col-2 col-sm-4 col-md-3 col-lg-3 flex justify-end list-none">
+              <div class="site-nav-toggle col-2 col-sm-4 col-md-3 col-lg-1 flex justify-end list-none">
                 {{ page.header_menu.languageswitcher }}
               </div>
             </div>
@@ -90,15 +103,28 @@
                 </a>
               </div>
 
-              <div class="site-nav-toggle campaign-menu col-7 col-sm-4 col-md-6 col-lg-6 flex justify-end">
+              <div class="site-nav-toggle campaign-menu col-7 col-sm-4 col-md-6 col-lg-9 flex justify-end">
                 <ul>
                 {% for menu in campaign_menu %}
-                    <li><a class="menu-item" href="{{ menu[1] }}">{{ menu[0] }}</a></li>
+                    {% if menu[0] %}
+                        <li class="flex-1 max-w-fit tracking-[1px]">
+                            <a class="menu-item" href="{{ menu[1] }}">{{ menu[0] }}</a>
+                            {% if campaign_menu[menu[0]] %}
+                                <ul>
+                                     {% for menu_2 in campaign_menu[menu[0]] %}
+                                        <li class="flex-1 max-w-fit tracking-[1px] menu-level-2">
+                                            <a class="menu-item" href="{{ menu_2[1] }}">{{ menu_2[0] }}</a>
+                                        </li>
+                                     {% endfor %}
+                                </ul>
+                            {% endif %}
+                        </li>
+                    {% endif %}
                 {% endfor %}
                 </ul>
               </div>
               
-              <div class="site-nav-toggle col-2 col-sm-4 col-md-3 col-lg-4 flex justify-end">
+              <div class="site-nav-toggle col-2 col-sm-4 col-md-3 col-lg-1 flex justify-end">
                 {{ page.header_menu.languageswitcher }}
               </div>
             </div>
@@ -120,7 +146,7 @@
   {# END OF HEADER #}
 
   {{ page.secondary_menu }}
-
+<div id="w3-parsing">
   {#{% if type == "topics_page" %}#}
   {#  {{#}
   {#    pattern('hero', {#}
@@ -232,6 +258,6 @@
         {% endif %}
     {% endif %}
   
-  
+ </div> 
 
 </div>{# /.layout-container #}

@@ -61,7 +61,7 @@
 	{# END OF HEADER #}
 
 	{{ page.secondary_menu }}
-
+<div id="w3-parsing">
 	{% if type == "topics_page" %}
 		{{
 			pattern('hero', {
@@ -91,7 +91,7 @@
 
 	{{ page.help }}
 
-	<main role="main" class="container-lg grow">
+	<main role="main" class="container-lg grow contact_page">
 		{{ page.breadcrumb }}
 		<a id="main-content" tabindex="-1"></a>
 		{# link is in html.html.twig #}
@@ -142,7 +142,7 @@
 			</div>
 		{% endif %}
 	</main>
-
+</div>
 	 {% if page.footer_logo or page.footer_menu or page.footer_legal %}
         {{ pattern('footer', {
           logo: Footer_logo,

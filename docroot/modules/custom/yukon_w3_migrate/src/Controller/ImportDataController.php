@@ -4,7 +4,9 @@ namespace Drupal\yukon_w3_migrate\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Database\Database;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Messenger\MessengerInterface;
+use Drupal\workbench_access\UserSectionStorageInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -19,13 +21,33 @@ class ImportDataController extends ControllerBase {
   protected $messenger;
 
   /**
+   * The entity type manager.
+   *
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+   */
+  protected $entityTypeManager;
+
+  /**
+   * The user section storage service.
+   *
+   * @var \Drupal\workbench_access\UserSectionStorageInterface
+   */
+  protected $userSectionStorage;
+
+  /**
    * Constructs InviteByEmail .
    *
    * @param \Drupal\Core\Messenger\MessengerInterface $messenger
    *   The messenger service.
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
+   *   The entity type manager service.
+   * @param \Drupal\workbench_access\UserSectionStorageInterface $user_section_storage
+   *   The user section storage service.
    */
-  public function __construct(MessengerInterface $messenger) {
+  public function __construct(MessengerInterface $messenger, EntityTypeManagerInterface $entity_type_manager, UserSectionStorageInterface $user_section_storage) {
     $this->messenger = $messenger;
+    $this->entityTypeManager = $entity_type_manager;
+    $this->userSectionStorage = $user_section_storage;
   }
 
   /**
@@ -33,7 +55,9 @@ class ImportDataController extends ControllerBase {
    */
   public static function create(ContainerInterface $container) {
     return new self(
-      $container->get('messenger')
+      $container->get('messenger'),
+      $container->get('entity_type.manager'),
+      $container->get('workbench_access.user_section_storage')
     );
   }
 
@@ -41,6 +65,38 @@ class ImportDataController extends ControllerBase {
    * Update the translation for primary links.
    */
   public function content() {
+    // To get another database (here : 'second')
+    $con = Database::getConnection('default', 'migrate');
+
+    // To set the active connection.
+    Database::setActiveConnection('migrate');
+
+    $query = $con->select("workbench_access_user", "n");
+    $query->fields("n");
+    $results = $query->execute()->fetchAll();
+
+    foreach ($results as $result) {
+      $account = $this->entityTypeManager->getStorage('user')->load($result->uid);
+      $scheme_storage = $this->entityTypeManager->getStorage('access_scheme');
+      $scheme = $scheme_storage->load('team');
+      if (!empty($account)) {
+        $this->userSectionStorage->addUser($scheme, $account, [$result->access_id]);
+      }
+    }
+
+    // To set the active connection.
+    Database::setActiveConnection('default');
+
+    $node_storage = $this->entityTypeManager->getStorage('node');
+    $entity = $node_storage->load('7534');
+    $entity->addTranslation('fr', ['title' => "Activités", 'body' => 'Activités du gouvernement du Yukon.'])->save();
+    $path_alias = $this->entityTypeManager()->getStorage('path_alias')->create([
+      'path' => "/node/7534",
+      'alias' => "/activites",
+      'langcode' => "fr",
+    ]);
+    $path_alias->save();
+
     $db = Database::getConnection();
     // Update format of the quick facts.
     $db->update("paragraph__field_facts")

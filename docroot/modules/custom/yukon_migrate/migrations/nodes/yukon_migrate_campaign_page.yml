@@ -97,6 +97,7 @@ process:
           - yukon_migrate_call_to_action
           - yukon_migrate_quote
           - yukon_migrate_charts
+          - yukon_migrate_full_width_image
         no_stub: true
 
   field_paragraphs:
@@ -157,10 +158,13 @@ process:
       no_stub: true
 
   field_child_campaign_pages:
-    - plugin: migration_lookup
-      source: field_child_campaign_pages/0/nid
-      migration: yukon_migrate_campaign_page
-      no_stub: true
+    - plugin: sub_process
+      source: field_child_campaign_pages
+      process:
+        target_id:
+          plugin: migration_lookup
+          source: nid
+          migration: yukon_migrate_campaign_page
 
   field_department_term:
     - plugin: migration_lookup
@@ -188,3 +192,4 @@ migration_dependencies:
     - yukon_migrate_charts
     - yukon_migrate_social_network
     - yukon_migrate_navigation_jump_point
+    - yukon_migrate_full_width_image

@@ -1,0 +1,15 @@
+.page-node-type-landing-page {
+    main {
+        .row {
+            @apply pt-0;
+        }
+    }
+    
+    .column-layout-card {
+        .subcategory-links {
+            a {
+                @apply font-medium;
+            }
+        }
+    }
+}

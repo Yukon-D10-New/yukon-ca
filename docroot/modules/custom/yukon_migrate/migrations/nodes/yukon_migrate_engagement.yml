@@ -41,12 +41,12 @@ process:
       value:
         plugin: format_date
         from_format: 'Y-m-d H:i:s'
-        to_format: 'Y-m-d\TH:i:s'
+        to_format: 'Y-m-d'
         source: value
       end_value:
         plugin: format_date
         from_format: 'Y-m-d H:i:s'
-        to_format: 'Y-m-d\TH:i:s'
+        to_format: 'Y-m-d'
         source: value2
 
   field_engagement_status: field_engagement_status
@@ -77,6 +77,12 @@ process:
     method: transformUri
     source: field_engagement_find_info/0/value
   field_engagement_find_info/format: constants/default_text_format
+  
+  field_engagement_results/value:
+    plugin: yukon_migrate_uri_transform
+    method: transformUri
+    source: field_engagement_results/0/value
+  field_engagement_results/format: constants/default_text_format
 
   field_engagement_find_results/value:
     plugin: yukon_migrate_uri_transform
